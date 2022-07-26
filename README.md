@@ -3,4 +3,5 @@
 **Objective**: Development of AI model for predicting antenna performance of Radar sensor using process data  
 **Host**: LG AI Research  
 **Organizer**: DACON  
+
 [Overview](https://dacon.io/competitions/official/235927/overview/description)

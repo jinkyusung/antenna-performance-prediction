@@ -21,6 +21,9 @@ def NRMSE(y_true, y_pred, divisor='max-min', percentage=True):
     elif divisor == 'mean':
         result /= np.mean(y_true)
 
+    else:
+        raise "divisor should be 'max-min' or 'mean'."
+
     if percentage:
         result *= 100
     return result

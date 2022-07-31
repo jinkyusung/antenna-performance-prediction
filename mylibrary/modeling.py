@@ -23,10 +23,8 @@ class meanError(Exception):
 class keywordError(Exception):
     def __init__(self, user_input=""):
         self.msg = "keywordError: invalid keyword for NRMSE()"
-        self.msg += f"""
-                    divisor should be 'max-min' or 'mean'
-                    your input is '{user_input}'.
-                    """
+        self.msg += f"""divisor should be 'max-min' or 'mean
+                        your input is '{user_input}'."""
     
     def __str__(self):
         return self.msg

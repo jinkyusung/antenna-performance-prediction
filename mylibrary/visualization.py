@@ -45,7 +45,11 @@ def corr_heatmap_with_y(x_df):
 
     for y_df in [y1, y2, y3, y4]:
         tmp = pd.concat([x_df, y_df], axis=1)
-        n = len(tmp.columns)
-        c = tmp.corr()
-        plt.figure(figsize=(n+1, n))
-        sns.heatmap(c, annot=True)
+        correlation = tmp.corr()
+        correlation = tmp.corr().filter(regex='Y').filter(regex='X', axis=0)
+
+        n = len(correlation.index)
+        m = len(correlation.column)
+
+        plt.figure(figsize=(m, n))
+        sns.heatmap(correlation, annot=True)

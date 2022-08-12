@@ -4,7 +4,6 @@ import seaborn as sns
 
 
 def pred_visualize(train, pred):
-    
     pred_t = list(zip(*pred))   # Transposed matrix of pred.
     n_feature = len(pred_t)     # The number of feature
     n_pred = len(pred)          # The number of prediction
@@ -23,7 +22,6 @@ def pred_visualize(train, pred):
     
     
 def print_namegroup(namegroup):
-    
     for feature_name in namegroup:
         print(f'{feature_name}: ', end='')
         print(*namegroup[feature_name], sep='  ')
@@ -53,3 +51,14 @@ def corr_heatmap_with_y(x_df):
 
         plt.figure(figsize=(m, n))
         sns.heatmap(correlation, annot=True)
+
+
+def x_to_y_visualize(x_column, y_df):
+    col = len(y_df.columns)
+    fig = plt.figure(figsize=(30, 10 * col))
+    
+    for i in range(col):
+        ax = fig.add_subplot(col, (col+1) // 2, i+1)
+        ax.set_title(f'{y_df.columns[i]}', fontdict={'fontsize': 16,'fontweight':'bold'})
+        ax.scatter(x_column, y_df.iloc[:, i], s=0.5, c='gray')
+    plt.show()

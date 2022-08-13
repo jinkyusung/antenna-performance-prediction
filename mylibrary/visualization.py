@@ -3,6 +3,28 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
+def show_plot(df, mean=True, median=False, horizons=[], \
+                color='gray', mean_color='blueviolet', median_color='b', hcolor='r'):
+    n = len(df.columns)
+    fig = plt.figure(figsize=(30, 5 * n))
+    
+    for i in range(1, n + 1):
+        ax = fig.add_subplot(n, 1, i)
+        ax.set_title(f'{df.columns[i-1]}', fontdict={'fontsize': 16,'fontweight':'bold'})
+        ax.scatter(df.index.to_list(), df.iloc[:, i-1], s=0.5, c=color)
+        
+        if horizons:
+            tmp = df[df.iloc[:, i-1] == horizons[i-1]]
+            ax.scatter(tmp.index.to_list(), tmp.iloc[:, i-1], s=0.5, c=hcolor)
+        if mean:
+            ax.hlines(df.iloc[:, i-1].mean(), -700, len(df)+700, color=mean_color, linestyle='dashed', label='Mean')
+            ax.legend(loc='best', shadow=True, fontsize='small')
+        if median:
+            ax.hlines(df.iloc[:, i-1].median(), -700, len(df)+700, color=median_color, linestyle='dashed', label='Median')
+            ax.legend(loc='best', shadow=True, fontsize='small')
+    plt.show()
+
+
 def pred_visualize(train, pred):
     pred_t = list(zip(*pred))   # Transposed matrix of pred.
     n_feature = len(pred_t)     # The number of feature
@@ -47,7 +69,7 @@ def corr_heatmap_with_y(x_df):
         correlation = tmp.corr().filter(regex='Y').filter(regex='X', axis=0)
 
         n = len(correlation.index)
-        m = len(correlation.column)
+        m = len(correlation.columns)
 
         plt.figure(figsize=(m, n))
         sns.heatmap(correlation, annot=True)

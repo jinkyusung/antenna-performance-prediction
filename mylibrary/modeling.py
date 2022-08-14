@@ -3,21 +3,13 @@ from sklearn.metrics import mean_squared_error
 import numpy as np
 
 
-######################### python Error classes ##############################
 class meanError(Exception):
     def __init__(self, msg='meanError: mean(y_true) is not Zero'):
         self.msg = msg
     
     def __str__(self):
         return self.msg
-#############################################################################
-
-
-
-################################ Functions ##################################
-def RMSE(y_true, y_pred):
-    """Calculate the Root Mean Squared Error."""
-    return mean_squared_error(y_true, y_pred) ** 0.5
+        
 
         
 def lg_nrmse(gt, preds):
@@ -30,4 +22,3 @@ def lg_nrmse(gt, preds):
         all_nrmse.append(nrmse)
     score = 1.2 * np.sum(all_nrmse[:8]) + 1.0 * np.sum(all_nrmse[8:14])
     return score
-#############################################################################
